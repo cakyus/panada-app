@@ -14,7 +14,11 @@ $vendorDir = $dir. DIRECTORY_SEPARATOR. 'vendor' . DIRECTORY_SEPARATOR;
 // Include the autoloader class handler
 require $vendorDir.'panada' . DIRECTORY_SEPARATOR . 'loader' . DIRECTORY_SEPARATOR . 'Auto.php';
 
-new Panada\Loader\Auto($vendorDir);
+if (is_file($vendorDir . DIRECTORY_SEPARATOR . 'autoload.php')) {
+	include_once($vendorDir . DIRECTORY_SEPARATOR . 'autoload.php');
+} else {
+	new Panada\Loader\Auto($vendorDir);
+}
 
 Panada\Resource\Gear::send(
     Panada\Http\Uri::getInstance(),
